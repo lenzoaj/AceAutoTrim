@@ -159,19 +159,53 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {[
-              "Seat Repairs",
-              "Headlinings",
-              "Tonneau Covers",
-              "Steering Wheel Recovers",
-              "Leather Retrims",
-              "Classic Car Resto Seat Work",
-              "General Trimming & Carpets"
+              {
+                title: "Seat Repairs",
+                desc: "Fixing tears, worn bolsters, and damaged foam to bring tired seats back to like-new condition.",
+              },
+              {
+                title: "Headlinings",
+                desc: "Replacing sagging or stained headlining fabric with a clean, factory-tight finish.",
+              },
+              {
+                title: "Tonneau Covers",
+                desc: "Custom-fitted tray and ute covers built to protect your load and match your interior.",
+              },
+              {
+                title: "Steering Wheel Recovers",
+                desc: "Re-wrapping worn steering wheels in fresh leather with clean, precise stitching.",
+              },
+              {
+                title: "Leather Retrims",
+                desc: "Full seat and interior leather retrims in your choice of colour, stitch pattern, and finish.",
+              },
+              {
+                title: "Classic Car Resto Seat Work",
+                desc: "Period-correct seat restorations for classic and custom builds, done to show standard.",
+              },
+              {
+                title: "General Repairs and Maintenance",
+                desc: "Ongoing trim upkeep and repairs to keep your interior looking sharp for years to come.",
+              },
+              {
+                title: "Carpet Replacement",
+                desc: "Fitting new moulded or custom-cut carpet sets to replace worn, torn, or faded flooring.",
+              },
             ].map((service, i) => (
-              <div key={i} className="group border-t border-border pt-6">
-                <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{service}</h3>
+              <div key={i} className="group relative border-t border-border pt-6">
+                <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{service.title}</h3>
+                <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-72 max-w-[80vw] translate-y-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                  <p className="border border-border bg-zinc-900 px-4 py-3 text-sm font-light text-muted-foreground shadow-lg">
+                    {service.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
+
+          <p className="mt-16 text-center text-lg font-medium uppercase tracking-widest text-primary">
+            And Much More
+          </p>
         </div>
       </section>
 

@@ -1,0 +1,1 @@
+- [Vite uppercase image extensions](vite-uppercase-image-extensions.md) — .JPG/.PNG imports need a custom vite-env.d.ts; vite/client only declares lowercase extensions.

@@ -1,0 +1,385 @@
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCreateEnquiry } from "@workspace/api-client-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2, MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+import logo from "@assets/46949ce0-cd4e-422e-9a9c-686f17436333_copy_copy_1783344356068.png";
+import cv8_1 from "@assets/CV8_Monaro_(1)_1783345538890.JPG";
+import cv8_2 from "@assets/CV8_Monaro_(2)_1783345538890.JPG";
+import cv8_3 from "@assets/CV8_Monaro_(3)_1783345538890.JPG";
+import cv8_4 from "@assets/CV8_Monaro_(4)_1783345538891.JPG";
+
+import vy_ss_1 from "@assets/VY_SS_(1)_1783345561220.JPG";
+import vy_ss_2 from "@assets/VY_SS_(2)_1783345561220.JPG";
+import vy_ss_3 from "@assets/VY_SS_(3)_1783345561220.JPG";
+
+import ve_ss_1 from "@assets/VE_SS_(1)_1783345581192.jpg";
+import ve_ss_2 from "@assets/VE_SS_(2)_1783345581193.JPG";
+import ve_ss_3 from "@assets/VE_SS_(3)_1783345581193.JPG";
+
+import hsv_1 from "@assets/VE_HSV_Seats_(1)_1783345598277.JPG";
+import hsv_2 from "@assets/VE_HSV_Seats_(2)_1783345598277.JPG";
+import hsv_3 from "@assets/VE_HSV_Seats_(3)_1783345598277.JPG";
+
+
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required").max(200),
+  email: z.string().email("Invalid email address").max(320),
+  phone: z.string().max(50).optional().nullable(),
+  vehicle: z.string().max(200).optional().nullable(),
+  message: z.string().min(1, "Message is required").max(5000),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
+export default function Home() {
+  const { toast } = useToast();
+  const createEnquiry = useCreateEnquiry();
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      vehicle: "",
+      message: "",
+    },
+  });
+
+  function onSubmit(data: FormValues) {
+    createEnquiry.mutate(
+      { data },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Enquiry Sent",
+            description: "Thanks for reaching out. We'll be in touch soon.",
+          });
+          form.reset();
+        },
+        onError: (error) => {
+          toast({
+            variant: "destructive",
+            title: "Failed to send enquiry",
+            description: error.data?.error || "Please try again later.",
+          });
+        },
+      }
+    );
+  }
+
+  const projects = [
+    {
+      title: "Holden CV8 Monaro",
+      desc: "Exterior + black diamond-stitch leather interior retrim",
+      images: [cv8_1, cv8_2, cv8_3, cv8_4],
+    },
+    {
+      title: "Holden VY SS",
+      desc: "Cream/tan diamond-stitch leather retrim",
+      images: [vy_ss_1, vy_ss_2, vy_ss_3],
+    },
+    {
+      title: "Holden VE SS Ute",
+      desc: "Purple exterior + grey diamond-stitch fabric/suede retrim",
+      images: [ve_ss_1, ve_ss_2, ve_ss_3],
+    },
+    {
+      title: "HSV Custom Seats",
+      desc: "Black leather/suede with embroidered HSV lion badges",
+      images: [hsv_1, hsv_2, hsv_3],
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
+      {/* Header */}
+      <header className="absolute top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center">
+        <div className="w-40 md:w-56">
+          <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain" />
+        </div>
+        <div className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-muted-foreground">
+          <a href="#services" className="hover:text-primary transition-colors">Services</a>
+          <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
+          <a href="#about" className="hover:text-primary transition-colors">About</a>
+          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border">
+        {/* Background dark overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-background to-background z-0" />
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 z-0 mix-blend-overlay" />
+        
+        <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
+            Obsessive <br/><span className="text-primary">Precision.</span>
+          </h1>
+          <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl font-light">
+            Premium automotive trimming, custom interiors, and restoration. 
+            Raw workshop grit meeting hand-stitched perfection in Wangara, WA.
+          </p>
+          <div className="mt-12 flex flex-col sm:flex-row gap-4">
+            <a href="#contact" className="inline-flex h-12 items-center justify-center bg-primary text-primary-foreground px-8 text-sm font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors">
+              Get a Quote
+            </a>
+            <a href="#projects" className="inline-flex h-12 items-center justify-center border border-border bg-transparent text-foreground px-8 text-sm font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-colors">
+              View Work
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="py-24 bg-zinc-950 border-b border-border">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight">Our Services</h2>
+            <p className="text-muted-foreground max-w-sm">Specializing in high-end re-trims and restorations. If it's in the cabin, we craft it.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {[
+              "Seat Repairs",
+              "Headlinings",
+              "Tonneau Covers",
+              "Steering Wheel Recovers",
+              "Leather Retrims",
+              "Classic Car Resto Seat Work",
+              "General Trimming & Carpets"
+            ].map((service, i) => (
+              <div key={i} className="group border-t border-border pt-6">
+                <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{service}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Showcase */}
+      <section id="projects" className="py-24">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Work</h2>
+          
+          <div className="flex flex-col gap-24">
+            {projects.map((project, idx) => (
+              <div key={idx} className="flex flex-col gap-6">
+                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                  <h3 className="text-2xl md:text-3xl font-bold uppercase text-white">{project.title}</h3>
+                  <p className="text-primary font-medium">{project.desc}</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {project.images.map((img, i) => (
+                    <div key={i} className="aspect-square bg-zinc-900 overflow-hidden relative group">
+                      <img 
+                        src={img} 
+                        alt={`${project.title} detail ${i+1}`} 
+                        className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
+                      />
+                      <div className="absolute inset-0 border border-white/10 pointer-events-none" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="py-24 bg-zinc-950 border-y border-border">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">The Craftsman</h2>
+              <div className="space-y-6 text-muted-foreground text-lg font-light">
+                <p>
+                  Ace Automotive Trimming is run by Anthony Lenzo, a qualified tradesman with a lifelong background in classic and custom cars.
+                </p>
+                <p>
+                  Established in 2021, the business was built on a foundation of obsessive attention to detail and a genuine passion for automotive culture. We don't just replace material; we restore character and elevate the driving experience.
+                </p>
+                <p className="text-white font-medium">
+                  Licensed Repairer WA — RB 13098
+                </p>
+              </div>
+            </div>
+            <div className="aspect-square bg-zinc-900 flex items-center justify-center p-12 border border-border">
+              {/* Abstract logo graphic for the about section */}
+              <img src={logo} alt="Ace Logo" className="opacity-20 grayscale max-w-full h-auto" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact / Enquiry Form */}
+      <section id="contact" className="py-24 relative overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">Get In Touch</h2>
+              <p className="text-muted-foreground mb-12">
+                Ready to discuss your next project? Fill out the form with details about your vehicle and what you're looking to achieve, and we'll get back to you with a quote.
+              </p>
+              
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-6 h-6 text-primary shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-bold text-white mb-1 uppercase tracking-wider">Workshop</h4>
+                    <p className="text-muted-foreground">Unit 3/47 Dellamarta Road<br/>Wangara WA 6065</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Phone className="w-6 h-6 text-primary shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-bold text-white mb-1 uppercase tracking-wider">Phone</h4>
+                    <p className="text-muted-foreground">0434 313 810</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Mail className="w-6 h-6 text-primary shrink-0 mt-1" />
+                  <div>
+                    <h4 className="font-bold text-white mb-1 uppercase tracking-wider">Email</h4>
+                    <p className="text-muted-foreground">admin@aceautotrim.com.au</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 flex gap-4">
+                <a href="#" className="w-12 h-12 flex items-center justify-center border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors">
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-12 h-12 flex items-center justify-center border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-card p-8 border border-border">
+              <h3 className="text-2xl font-bold uppercase mb-6 text-white border-b border-border pb-4">Project Enquiry</h3>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="uppercase tracking-wider text-xs text-muted-foreground">Name *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Doe" className="bg-background border-border rounded-none h-12 focus-visible:ring-primary" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="uppercase tracking-wider text-xs text-muted-foreground">Email *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="john@example.com" type="email" className="bg-background border-border rounded-none h-12 focus-visible:ring-primary" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="uppercase tracking-wider text-xs text-muted-foreground">Phone</FormLabel>
+                          <FormControl>
+                            <Input placeholder="0400 000 000" className="bg-background border-border rounded-none h-12 focus-visible:ring-primary" {...field} value={field.value || ''} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="vehicle"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="uppercase tracking-wider text-xs text-muted-foreground">Vehicle Make/Model</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g. Holden VY SS" className="bg-background border-border rounded-none h-12 focus-visible:ring-primary" {...field} value={field.value || ''} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="uppercase tracking-wider text-xs text-muted-foreground">Project Details *</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Tell us about the work you need done..." 
+                            className="min-h-[120px] bg-background border-border rounded-none resize-none focus-visible:ring-primary" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button 
+                    type="submit" 
+                    className="w-full h-14 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors"
+                    disabled={createEnquiry.isPending}
+                  >
+                    {createEnquiry.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Submit Enquiry"
+                    )}
+                  </Button>
+                </form>
+              </Form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-zinc-950 py-12 text-center text-muted-foreground text-sm">
+        <div className="container mx-auto px-6 flex flex-col items-center gap-4">
+          <img src={logo} alt="Ace Automotive Trimming" className="w-24 opacity-50 grayscale" />
+          <p>© {new Date().getFullYear()} Ace Automotive Trimming. All rights reserved.</p>
+          <p className="uppercase tracking-widest text-xs">Licensed Repairer WA — RB 13098</p>
+        </div>
+      </footer>
+    </div>
+  );
+}

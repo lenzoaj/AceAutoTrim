@@ -292,14 +292,14 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Projects</h2>
           </Reveal>
           
-          <div className="flex flex-col gap-12 md:gap-24">
+          <div className="flex flex-col gap-12">
             {projects.map((project, idx) => (
-              <Reveal key={idx} className="flex flex-col gap-3 md:gap-6">
+              <Reveal key={idx} className="flex flex-col gap-3">
                 <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
-                  <h3 className="text-lg md:text-3xl font-bold uppercase text-white">{project.title}</h3>
-                  <p className="text-primary text-sm md:text-base font-medium">{project.desc}</p>
+                  <h3 className="text-lg md:text-xl font-bold uppercase text-white">{project.title}</h3>
+                  <p className="text-primary text-sm font-medium">{project.desc}</p>
                 </div>
-                <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-1.5 md:gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-1.5 md:gap-3">
                   {project.images.map((img, i) => (
                     <button
                       key={i}

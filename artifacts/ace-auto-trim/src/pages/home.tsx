@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Reveal } from "@/components/reveal";
 
 import logo from "@assets/46949ce0-cd4e-422e-9a9c-686f17436333_copy_copy_1783344356068.png";
 import licensedRepairerLogo from "@assets/licensed_repairer_logo_nobg.png";
@@ -140,17 +141,12 @@ export default function Home() {
         />
 
         <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
-          <img
-            src={logo}
-            alt="Ace Automotive Trimming"
-            className="w-64 md:w-96 h-auto object-contain brightness-0 invert drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] mb-8"
-          />
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
             Obsessive <br/><span className="text-primary">Precision.</span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl font-light">
             Premium automotive trimming, custom interiors, and restoration. 
-            Raw workshop grit meeting hand-stitched perfection in Wangara, WA.
+            Attention to detail meeting hand-stitched perfection in Wangara, WA.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-4">
             <a href="#contact" className="inline-flex h-12 items-center justify-center bg-primary text-primary-foreground px-8 text-sm font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors">
@@ -166,10 +162,10 @@ export default function Home() {
       {/* Services */}
       <section id="services" className="py-24 bg-zinc-950 border-b border-border">
         <div className="container mx-auto px-6">
-          <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <Reveal className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight">Our Services</h2>
             <p className="text-muted-foreground max-w-sm">Specializing in high-end re-trims and restorations. If it's in the cabin, we craft it.</p>
-          </div>
+          </Reveal>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {[
@@ -210,14 +206,14 @@ export default function Home() {
                 desc: "Custom-built and reupholstered boat seating made to withstand sun, salt, and spray.",
               },
             ].map((service, i) => (
-              <div key={i} className="group relative border-t border-border pt-6">
+              <Reveal key={i} delay={i * 60} className="group relative border-t border-border pt-6">
                 <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{service.title}</h3>
                 <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-72 max-w-[80vw] translate-y-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                   <p className="border border-border bg-zinc-900 px-4 py-3 text-sm font-light text-muted-foreground shadow-lg">
                     {service.desc}
                   </p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
 
@@ -230,11 +226,13 @@ export default function Home() {
       {/* Projects Showcase */}
       <section id="projects" className="py-24">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Projects</h2>
+          <Reveal>
+            <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Projects</h2>
+          </Reveal>
           
           <div className="flex flex-col gap-24">
             {projects.map((project, idx) => (
-              <div key={idx} className="flex flex-col gap-6">
+              <Reveal key={idx} className="flex flex-col gap-6">
                 <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
                   <h3 className="text-2xl md:text-3xl font-bold uppercase text-white">{project.title}</h3>
                   <p className="text-primary font-medium">{project.desc}</p>
@@ -256,7 +254,7 @@ export default function Home() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -266,7 +264,7 @@ export default function Home() {
       <section id="about" className="py-24 bg-zinc-950 border-y border-border">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
+            <Reveal>
               <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">The Craftsman</h2>
               <div className="space-y-6 text-muted-foreground text-lg font-light">
                 <p>
@@ -284,11 +282,11 @@ export default function Home() {
                   className="w-32 h-auto"
                 />
               </div>
-            </div>
-            <div className="aspect-square bg-zinc-900 flex items-center justify-center p-12 border border-border">
+            </Reveal>
+            <Reveal delay={150} className="aspect-square bg-zinc-900 flex items-center justify-center p-12 border border-border">
               {/* Abstract logo graphic for the about section */}
               <img src={logo} alt="Ace Logo" className="opacity-20 brightness-0 invert max-w-full h-auto" />
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -297,7 +295,7 @@ export default function Home() {
       <section id="contact" className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16">
-            <div>
+            <Reveal>
               <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">Get In Touch</h2>
               <p className="text-muted-foreground mb-12">
                 Ready to discuss your next project or finally get that trim repaired? Fill out the form with details about your vehicle and what you're looking to achieve, and we'll get back to you with a quote.
@@ -335,9 +333,9 @@ export default function Home() {
                   <Instagram className="w-5 h-5" />
                 </a>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="bg-card p-8 border border-border">
+            <Reveal delay={150} className="bg-card p-8 border border-border">
               <h3 className="text-2xl font-bold uppercase mb-6 text-white border-b border-border pb-4">Project Enquiry</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -433,7 +431,7 @@ export default function Home() {
                   </Button>
                 </form>
               </Form>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>

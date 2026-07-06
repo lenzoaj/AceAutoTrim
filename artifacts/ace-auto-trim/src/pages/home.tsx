@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 
 import logo from "@assets/46949ce0-cd4e-422e-9a9c-686f17436333_copy_copy_1783344356068.png";
+import licensedRepairerLogo from "@assets/Screenshot_2026-07-05_222849_copy_1783348564698.png";
 import cv8_1 from "@assets/CV8_Monaro_(1)_1783345538890.JPG";
 import cv8_2 from "@assets/CV8_Monaro_(2)_1783345538890.JPG";
 import cv8_3 from "@assets/CV8_Monaro_(3)_1783345538890.JPG";
@@ -89,17 +90,17 @@ export default function Home() {
   const projects = [
     {
       title: "Holden CV8 Monaro",
-      desc: "Exterior + black diamond-stitch leather interior retrim",
+      desc: "Black diamond-stitch leather retrim",
       images: [cv8_1, cv8_2, cv8_3, cv8_4],
     },
     {
-      title: "Holden VY SS",
+      title: "Holden VY SS Ute",
       desc: "Cream/tan diamond-stitch leather retrim",
       images: [vy_ss_5, vy_ss_1, vy_ss_2, vy_ss_3, vy_ss_4, vy_ss_6],
     },
     {
       title: "Holden VE SS Ute",
-      desc: "Purple exterior + grey diamond-stitch fabric/suede retrim",
+      desc: "Grey diamond-stitch fabric/suede retrim",
       images: [ve_ss_1, ve_ss_2, ve_ss_3, ve_ss_4],
     },
     {
@@ -212,7 +213,7 @@ export default function Home() {
       {/* Projects Showcase */}
       <section id="projects" className="py-24">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Work</h2>
+          <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Projects</h2>
           
           <div className="flex flex-col gap-24">
             {projects.map((project, idx) => (
@@ -253,8 +254,13 @@ export default function Home() {
                   Established in 2021, the business was built on a foundation of obsessive attention to detail and a genuine passion for automotive culture. We don't just replace material; we restore character and elevate the driving experience.
                 </p>
                 <p className="text-white font-medium">
-                  Licensed Repairer WA — RB 13098
+                  Licensed Repairer WA — MRB 13098
                 </p>
+                <img
+                  src={licensedRepairerLogo}
+                  alt="Licensed Repairer Western Australia"
+                  className="w-32 h-auto"
+                />
               </div>
             </div>
             <div className="aspect-square bg-zinc-900 flex items-center justify-center p-12 border border-border">
@@ -272,7 +278,7 @@ export default function Home() {
             <div>
               <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">Get In Touch</h2>
               <p className="text-muted-foreground mb-12">
-                Ready to discuss your next project? Fill out the form with details about your vehicle and what you're looking to achieve, and we'll get back to you with a quote.
+                Ready to discuss your next project or finally get that trim repaired? Fill out the form with details about your vehicle and what you're looking to achieve, and we'll get back to you with a quote.
               </p>
               
               <div className="space-y-8">
@@ -415,7 +421,7 @@ export default function Home() {
         <div className="container mx-auto px-6 flex flex-col items-center gap-4">
           <img src={logo} alt="Ace Automotive Trimming" className="w-24 opacity-50 grayscale" />
           <p>© {new Date().getFullYear()} Ace Automotive Trimming. All rights reserved.</p>
-          <p className="uppercase tracking-widest text-xs">Licensed Repairer WA — RB 13098</p>
+          <p className="uppercase tracking-widest text-xs">Licensed Repairer WA — MRB 13098</p>
         </div>
       </footer>
     </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
+import { Loader2, MapPin, Phone, Mail, Instagram, Facebook, X } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -17,7 +18,7 @@ import {
 } from "@/components/ui/form";
 
 import logo from "@assets/46949ce0-cd4e-422e-9a9c-686f17436333_copy_copy_1783344356068.png";
-import licensedRepairerLogo from "@assets/Screenshot_2026-07-05_222849_copy_1783348564698.png";
+import licensedRepairerLogo from "@assets/licensed_repairer_logo_nobg.png";
 import cv8_1 from "@assets/CV8_Monaro_(1)_1783345538890.JPG";
 import cv8_2 from "@assets/CV8_Monaro_(2)_1783345538890.JPG";
 import cv8_3 from "@assets/CV8_Monaro_(3)_1783345538890.JPG";
@@ -53,6 +54,7 @@ type FormValues = z.infer<typeof formSchema>;
 export default function Home() {
   const { toast } = useToast();
   const createEnquiry = useCreateEnquiry();
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -115,7 +117,7 @@ export default function Home() {
       {/* Header */}
       <header className="absolute top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center">
         <div className="w-40 md:w-56">
-          <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain" />
+          <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain brightness-0 invert" />
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-muted-foreground">
           <a href="#services" className="hover:text-primary transition-colors">Services</a>
@@ -126,12 +128,23 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border">
+      <section className="relative min-h-[95vh] flex items-center justify-center pt-32 pb-12 overflow-hidden border-b border-border">
         {/* Background dark overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-background to-background z-0" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-800/30 via-background to-background z-0" />
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 z-0 mix-blend-overlay" />
-        
+        <img
+          src={logo}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 m-auto w-[140vw] max-w-none md:w-[70vw] opacity-[0.05] brightness-0 invert pointer-events-none select-none z-0"
+        />
+
         <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
+          <img
+            src={logo}
+            alt="Ace Automotive Trimming"
+            className="w-64 md:w-96 h-auto object-contain brightness-0 invert drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] mb-8"
+          />
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
             Obsessive <br/><span className="text-primary">Precision.</span>
           </h1>
@@ -192,6 +205,10 @@ export default function Home() {
                 title: "Carpet Replacement",
                 desc: "Fitting new moulded or custom-cut carpet sets to replace worn, torn, or faded flooring.",
               },
+              {
+                title: "Marine Seats",
+                desc: "Custom-built and reupholstered boat seating made to withstand sun, salt, and spray.",
+              },
             ].map((service, i) => (
               <div key={i} className="group relative border-t border-border pt-6">
                 <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{service.title}</h3>
@@ -224,14 +241,19 @@ export default function Home() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {project.images.map((img, i) => (
-                    <div key={i} className="aspect-square bg-zinc-900 overflow-hidden relative group">
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setLightboxImage({ src: img, alt: `${project.title} detail ${i + 1}` })}
+                      className="aspect-square bg-zinc-900 overflow-hidden relative group cursor-zoom-in"
+                    >
                       <img 
                         src={img} 
                         alt={`${project.title} detail ${i+1}`} 
                         className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
                       />
                       <div className="absolute inset-0 border border-white/10 pointer-events-none" />
-                    </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -265,7 +287,7 @@ export default function Home() {
             </div>
             <div className="aspect-square bg-zinc-900 flex items-center justify-center p-12 border border-border">
               {/* Abstract logo graphic for the about section */}
-              <img src={logo} alt="Ace Logo" className="opacity-20 grayscale max-w-full h-auto" />
+              <img src={logo} alt="Ace Logo" className="opacity-20 brightness-0 invert max-w-full h-auto" />
             </div>
           </div>
         </div>
@@ -416,10 +438,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 animate-in fade-in duration-200"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center border border-white/20 text-white hover:border-primary hover:text-primary transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <img
+            src={lightboxImage.src}
+            alt={lightboxImage.alt}
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       {/* Footer */}
       <footer className="border-t border-border bg-zinc-950 py-12 text-center text-muted-foreground text-sm">
         <div className="container mx-auto px-6 flex flex-col items-center gap-4">
-          <img src={logo} alt="Ace Automotive Trimming" className="w-24 opacity-50 grayscale" />
+          <img src={logo} alt="Ace Automotive Trimming" className="w-24 opacity-50 brightness-0 invert" />
           <p>© {new Date().getFullYear()} Ace Automotive Trimming. All rights reserved.</p>
           <p className="uppercase tracking-widest text-xs">Licensed Repairer WA — MRB 13098</p>
         </div>

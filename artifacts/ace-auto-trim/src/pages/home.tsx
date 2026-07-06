@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, MapPin, Phone, Mail, Instagram, Facebook, X } from "lucide-react";
+import { Loader2, MapPin, Phone, Mail, Instagram, Facebook, X, Menu } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -16,7 +16,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Sheet, SheetContent, SheetClose, SheetTrigger } from "@/components/ui/sheet";
 import { Reveal } from "@/components/reveal";
+import { cn } from "@/lib/utils";
 
 import logo from "@assets/46949ce0-cd4e-422e-9a9c-686f17436333_copy_copy_1783344356068.png";
 import licensedRepairerLogo from "@assets/licensed_repairer_logo_nobg.png";
@@ -41,6 +43,11 @@ import hsv_1 from "@assets/VE_HSV_Seats_(1)_1783345598277.JPG";
 import hsv_2 from "@assets/VE_HSV_Seats_(2)_1783345598277.JPG";
 import hsv_3 from "@assets/VE_HSV_Seats_(3)_1783345598277.JPG";
 
+import supra_1 from "@assets/MK4_Supra_Starlights_(3)_1783350982068.jpg";
+import supra_2 from "@assets/MK4_Supra_Starlights_(1)_1783350982068.JPG";
+import supra_3 from "@assets/MK4_Supra_Starlights_(4)_1783350982068.JPG";
+import supra_4 from "@assets/MK4_Supra_Starlights_(2)_1783350982068.JPG";
+
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required").max(200),
@@ -56,6 +63,8 @@ export default function Home() {
   const { toast } = useToast();
   const createEnquiry = useCreateEnquiry();
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
+  const [openService, setOpenService] = useState<number | null>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -111,13 +120,18 @@ export default function Home() {
       desc: "Black leather/suede with embroidered HSV lion badges",
       images: [hsv_1, hsv_2, hsv_3],
     },
+    {
+      title: "MK4 Supra Starlight",
+      desc: "Alcantara wrapped headlining with 1000 starlight kit installed",
+      images: [supra_1, supra_2, supra_3, supra_4],
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Header */}
       <header className="absolute top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center">
-        <div className="w-40 md:w-56">
+        <div className="w-32 sm:w-40 md:w-56">
           <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain brightness-0 invert" />
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-muted-foreground">
@@ -126,6 +140,34 @@ export default function Home() {
           <a href="#about" className="hover:text-primary transition-colors">About</a>
           <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
         </div>
+
+        <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+          <SheetTrigger asChild>
+            <button
+              type="button"
+              className="md:hidden w-11 h-11 flex items-center justify-center text-white"
+              aria-label="Open menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="bg-zinc-950 border-border w-3/4 sm:max-w-xs flex flex-col">
+            <div className="flex flex-col gap-8 mt-16 text-lg font-medium tracking-widest uppercase text-muted-foreground">
+              <SheetClose asChild>
+                <a href="#services" className="hover:text-primary transition-colors">Services</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a href="#about" className="hover:text-primary transition-colors">About</a>
+              </SheetClose>
+              <SheetClose asChild>
+                <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+              </SheetClose>
+            </div>
+          </SheetContent>
+        </Sheet>
       </header>
 
       {/* Hero */}
@@ -205,16 +247,36 @@ export default function Home() {
                 title: "Marine Seats",
                 desc: "Custom-built and reupholstered boat seating made to withstand sun, salt, and spray.",
               },
-            ].map((service, i) => (
-              <Reveal key={i} delay={i * 60} className="group relative border-t border-border pt-6">
-                <h3 className="text-xl font-medium group-hover:text-primary transition-colors">{service.title}</h3>
-                <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-72 max-w-[80vw] translate-y-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100">
-                  <p className="border border-border bg-zinc-900 px-4 py-3 text-sm font-light text-muted-foreground shadow-lg">
-                    {service.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+            ].map((service, i) => {
+              const isOpen = openService === i;
+              return (
+                <Reveal key={i} delay={i * 60}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenService(isOpen ? null : i)}
+                    className="group relative w-full text-left border-t border-border pt-6"
+                  >
+                    <h3 className={cn(
+                      "text-xl font-medium transition-colors md:group-hover:text-primary",
+                      isOpen && "text-primary"
+                    )}>
+                      {service.title}
+                    </h3>
+                    <p className={cn(
+                      "md:hidden overflow-hidden text-sm font-light text-muted-foreground transition-all duration-300 ease-out",
+                      isOpen ? "max-h-40 opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"
+                    )}>
+                      {service.desc}
+                    </p>
+                    <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 hidden w-72 max-w-[80vw] translate-y-1 opacity-0 transition-all duration-200 md:block md:group-hover:translate-y-0 md:group-hover:opacity-100">
+                      <p className="border border-border bg-zinc-900 px-4 py-3 text-sm font-light text-muted-foreground shadow-lg">
+                        {service.desc}
+                      </p>
+                    </div>
+                  </button>
+                </Reveal>
+              );
+            })}
           </div>
 
           <p className="mt-16 text-center text-lg font-medium uppercase tracking-widest text-primary">
@@ -230,14 +292,14 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-16">Recent Projects</h2>
           </Reveal>
           
-          <div className="flex flex-col gap-24">
+          <div className="flex flex-col gap-12 md:gap-24">
             {projects.map((project, idx) => (
-              <Reveal key={idx} className="flex flex-col gap-6">
-                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-                  <h3 className="text-2xl md:text-3xl font-bold uppercase text-white">{project.title}</h3>
-                  <p className="text-primary font-medium">{project.desc}</p>
+              <Reveal key={idx} className="flex flex-col gap-3 md:gap-6">
+                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-1 md:gap-4">
+                  <h3 className="text-lg md:text-3xl font-bold uppercase text-white">{project.title}</h3>
+                  <p className="text-primary text-sm md:text-base font-medium">{project.desc}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-1.5 md:gap-4">
                   {project.images.map((img, i) => (
                     <button
                       key={i}

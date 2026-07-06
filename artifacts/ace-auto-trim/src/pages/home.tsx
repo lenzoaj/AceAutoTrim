@@ -25,10 +25,14 @@ import cv8_4 from "@assets/CV8_Monaro_(4)_1783345538891.JPG";
 import vy_ss_1 from "@assets/VY_SS_(1)_1783345561220.JPG";
 import vy_ss_2 from "@assets/VY_SS_(2)_1783345561220.JPG";
 import vy_ss_3 from "@assets/VY_SS_(3)_1783345561220.JPG";
+import vy_ss_4 from "@assets/VY_SS_(4)_1783345561220.JPG";
+import vy_ss_5 from "@assets/VY_SS_(5)_1783345561220.JPG";
+import vy_ss_6 from "@assets/VY_SS_(6)_1783345561220.JPG";
 
 import ve_ss_1 from "@assets/VE_SS_(1)_1783345581192.jpg";
 import ve_ss_2 from "@assets/VE_SS_(2)_1783345581193.JPG";
 import ve_ss_3 from "@assets/VE_SS_(3)_1783345581193.JPG";
+import ve_ss_4 from "@assets/VE_SS_(4)_1783345581193.JPG";
 
 import hsv_1 from "@assets/VE_HSV_Seats_(1)_1783345598277.JPG";
 import hsv_2 from "@assets/VE_HSV_Seats_(2)_1783345598277.JPG";
@@ -91,12 +95,12 @@ export default function Home() {
     {
       title: "Holden VY SS",
       desc: "Cream/tan diamond-stitch leather retrim",
-      images: [vy_ss_1, vy_ss_2, vy_ss_3],
+      images: [vy_ss_5, vy_ss_1, vy_ss_2, vy_ss_3, vy_ss_4, vy_ss_6],
     },
     {
       title: "Holden VE SS Ute",
       desc: "Purple exterior + grey diamond-stitch fabric/suede retrim",
-      images: [ve_ss_1, ve_ss_2, ve_ss_3],
+      images: [ve_ss_1, ve_ss_2, ve_ss_3, ve_ss_4],
     },
     {
       title: "HSV Custom Seats",

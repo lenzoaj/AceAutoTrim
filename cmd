@@ -1,0 +1,1 @@
+move ace-auto-trim\* .

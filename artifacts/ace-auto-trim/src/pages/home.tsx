@@ -2,7 +2,6 @@ import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateEnquiry } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -61,10 +60,12 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function Home() {
   const { toast } = useToast();
-  const createEnquiry = useCreateEnquiry();
+  const [submitting, setSubmitting] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
   const [openService, setOpenService] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const FORMSPREE_ID = "YOUR_FORMSPREE_ID";
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -77,26 +78,31 @@ export default function Home() {
     },
   });
 
-  function onSubmit(data: FormValues) {
-    createEnquiry.mutate(
-      { data },
-      {
-        onSuccess: () => {
-          toast({
-            title: "Enquiry Sent",
-            description: "Thanks for reaching out. We'll be in touch soon.",
-          });
-          form.reset();
-        },
-        onError: (error) => {
-          toast({
-            variant: "destructive",
-            title: "Failed to send enquiry",
-            description: error.data?.error || "Please try again later.",
-          });
-        },
+  async function onSubmit(data: FormValues) {
+    setSubmitting(true);
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone || "",
+          vehicle: data.vehicle || "",
+          message: data.message,
+        }),
+      });
+      if (res.ok) {
+        toast({ title: "Enquiry Sent", description: "Thanks for reaching out. We'll be in touch soon." });
+        form.reset();
+      } else {
+        throw new Error("Form submission failed");
       }
-    );
+    } catch {
+      toast({ variant: "destructive", title: "Failed to send enquiry", description: "Please try again later." });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const projects = [
@@ -480,9 +486,9 @@ export default function Home() {
                   <Button 
                     type="submit" 
                     className="w-full h-14 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors"
-                    disabled={createEnquiry.isPending}
+                    disabled={submitting}
                   >
-                    {createEnquiry.isPending ? (
+                    {submitting ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Sending...

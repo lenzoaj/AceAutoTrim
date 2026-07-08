@@ -198,7 +198,7 @@ export default function Home() {
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-4">
             <a href="#contact" className="inline-flex h-12 items-center justify-center bg-primary text-primary-foreground px-8 text-sm font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors">
-              Get a Quote
+              Enquire Now
             </a>
             <a href="#projects" className="inline-flex h-12 items-center justify-center border border-border bg-transparent text-foreground px-8 text-sm font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-colors">
               View Work
@@ -251,7 +251,7 @@ export default function Home() {
               },
               {
                 title: "Marine Seats",
-                desc: "Custom-built and reupholstered boat seating made to withstand sun, salt, and spray.",
+                desc: "Repairing and reupholstering boat seating made to withstand sun, salt, and spray.",
               },
             ].map((service, i) => {
               const isOpen = openService === i;
@@ -336,10 +336,10 @@ export default function Home() {
               <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">The Craftsman</h2>
               <div className="space-y-6 text-muted-foreground text-lg font-light">
                 <p>
-                  Ace Automotive Trimming is run by Anthony Lenzo, a qualified tradesman with a lifelong background in classic and custom cars.
+                  Ace Automotive Trimming is operated by Anthony Lenzo, a qualified tradesman with a lifelong background in classic and custom cars.
                 </p>
                 <p>
-                  Established in 2021, the business was built on a foundation of obsessive attention to detail and a genuine passion for automotive culture. We don't just replace material; we restore character and elevate the driving experience.
+                  Established in 2021, the business was built on a foundation of meticulous attention to detail and a genuine passion for automotive culture. We don't just replace material; we restore character and elevate the driving experience.
                 </p>
                 <p className="text-white font-medium">
                   Licensed Repairer WA — MRB 13098
@@ -366,7 +366,7 @@ export default function Home() {
             <Reveal>
               <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight mb-8">Get In Touch</h2>
               <p className="text-muted-foreground mb-12">
-                Ready to discuss your next project or finally get that trim repaired? Fill out the form with details about your vehicle and what you're looking to achieve, and we'll get back to you with a quote.
+                Ready to discuss your next project or finally get that trim repaired? Fill out the form with details about your vehicle and what you're looking to achieve, and we'll get back to you as soon as possible.
               </p>
               
               <div className="space-y-8">

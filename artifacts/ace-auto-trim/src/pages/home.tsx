@@ -190,7 +190,7 @@ export default function Home() {
 
         <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
-            Obsessive <br/><span className="text-primary">Precision.</span>
+            Stitched <br/><span className="text-primary">To Last.</span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl font-light">
             Premium automotive trimming, custom interiors, and restoration. 

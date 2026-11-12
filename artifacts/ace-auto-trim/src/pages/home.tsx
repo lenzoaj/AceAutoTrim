@@ -137,7 +137,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Header */}
       <header className="absolute top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center">
-        <div className="w-32 sm:w-40 md:w-56">
+        <div className="hidden md:block md:w-56">
           <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain brightness-0 invert" />
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-muted-foreground">
@@ -188,7 +188,12 @@ export default function Home() {
           className="absolute inset-0 m-auto w-[140vw] max-w-none md:w-[70vw] opacity-[0.05] brightness-0 invert pointer-events-none select-none z-0"
         />
 
-        <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
+        {/* Mobile logo */}
+<img
+  src={logo}
+  alt="Ace Automotive Trimming"
+  className="block md:hidden w-[85%] max-w-[380px] h-auto object-contain mb-10"
+/>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
             Stitched<br/><span className="text-primary">To Last.</span>
           </h1>

@@ -33,7 +33,7 @@ import vy_ss_4 from "@assets/VY_SS_(4)_1783345561220.JPG";
 import vy_ss_5 from "@assets/VY_SS_(5)_1783345561220.JPG";
 import vy_ss_6 from "@assets/VY_SS_(6)_1783345561220.JPG";
 
-import ve_ss_1 from "@assets/VE_SS_(1)_1783345581192.jpg";
+import ve_ss_1 from "@assets/0f189fb6-1539-41ca-b3ba-cee723926515.jpg";
 import ve_ss_2 from "@assets/VE_SS_(2)_1783345581193.JPG";
 import ve_ss_3 from "@assets/VE_SS_(3)_1783345581193.JPG";
 import ve_ss_4 from "@assets/VE_SS_(4)_1783345581193.JPG";
@@ -41,6 +41,13 @@ import ve_ss_4 from "@assets/VE_SS_(4)_1783345581193.JPG";
 import hsv_1 from "@assets/VE_HSV_Seats_(1)_1783345598277.JPG";
 import hsv_2 from "@assets/VE_HSV_Seats_(2)_1783345598277.JPG";
 import hsv_3 from "@assets/VE_HSV_Seats_(3)_1783345598277.JPG";
+
+import wm_caprice_exterior from "@assets/3c7bf5d6-2c6b-407d-a906-3889870bee7d.jpg";
+import wm_caprice_front from "@assets/d30d4885-7ea6-4020-8335-677d42bad7f4.jpg";
+import wm_caprice_stitching from "@assets/7d341620-c846-4589-a3cf-b7f1fc22f9b3.jpg";
+import wm_caprice_door from "@assets/99c5683b-4bc6-4fdf-bd89-e59dcdc28f32.jpg";
+import wm_caprice_rear_side from "@assets/76541067-3098-40b9-888a-9a09fa3ccb66.jpg";
+import wm_caprice_rear from "@assets/e73ec60f-c029-4f2e-88de-bea36a08e5fe.jpg";
 
 import supra_1 from "@assets/MK4_Supra_Starlights_(3)_1783350982068.jpg";
 import supra_2 from "@assets/MK4_Supra_Starlights_(1)_1783350982068.JPG";
@@ -123,6 +130,11 @@ const [activeGallery, setActiveGallery] = useState<{
       title: "Holden VE SS Ute",
       desc: "Grey diamond-stitch fabric/suede retrim",
       images: [ve_ss_1, ve_ss_2, ve_ss_3, ve_ss_4],
+    },
+    {
+      title: "WM Caprice",
+      desc: "Black diamond stitched leather full retrim",
+      images: [wm_caprice_exterior, wm_caprice_front, wm_caprice_stitching, wm_caprice_door, wm_caprice_rear_side, wm_caprice_rear],
     },
     {
       title: "HSV Custom Seats",

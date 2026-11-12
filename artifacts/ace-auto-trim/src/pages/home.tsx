@@ -238,7 +238,17 @@ const [activeGallery, setActiveGallery] = useState<{
             Premium automotive trimming, custom interiors, and restoration. 
             Attention to detail meeting hand-stitched perfection in Wangara, WA.
           </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-4">
+          <div className="mt-9 flex flex-col items-center text-center" aria-label="Opening announcement">
+            <div className="inline-flex flex-col items-center border-y border-primary/50 px-7 py-4 -rotate-2">
+              <p className="text-primary text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-[0.16em] leading-tight">
+                Opening 2027
+              </p>
+              <p className="mt-2 text-xs sm:text-sm md:text-base text-white/80 font-medium tracking-wide">
+                Undergoing renovations, Enquiries open now
+              </p>
+            </div>
+          </div>
+          <div className="mt-9 flex flex-col sm:flex-row gap-4">
             <a href="#contact" className="inline-flex h-12 items-center justify-center bg-primary text-primary-foreground px-8 text-sm font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors">
               Enquire Now
             </a>

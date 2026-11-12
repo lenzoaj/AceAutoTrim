@@ -190,7 +190,7 @@ export default function Home() {
 
 
 {/* Large white ACE logo at top of mobile hero */}
-<div className="absolute top-16 left-0 right-0 z-20 flex justify-center pointer-events-none md:hidden">
+<div className="absolute top-2 left-0 right-0 z-20 flex justify-center pointer-events-none md:hidden">
   <img
     src={logo}
     alt="Ace Automotive Trimming"

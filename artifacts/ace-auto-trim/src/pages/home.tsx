@@ -607,8 +607,6 @@ const [activeGallery, setActiveGallery] = useState<{
   );
 })()}
 
-      )}
-
       {/* Footer */}
       <footer className="border-t border-border bg-zinc-950 py-12 text-center text-muted-foreground text-sm">
         <div className="container mx-auto px-6 flex flex-col items-center gap-4">

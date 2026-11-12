@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, MapPin, Phone, Mail, Instagram, Facebook, X, Menu } from "lucide-react";
+import { Loader2, MapPin, Phone, Mail, Instagram, Facebook, X, Menu, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Form,
   FormControl,

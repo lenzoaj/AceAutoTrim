@@ -77,7 +77,7 @@ const [activeGallery, setActiveGallery] = useState<{
   const [openService, setOpenService] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  const FORMSPREE_ID = "xkolawwd";
+  const BASIN_ENDPOINT = "https://usebasin.com/f/5507c3341084";
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -101,23 +101,21 @@ const [activeGallery, setActiveGallery] = useState<{
         message: data.message,
       };
       const hasImages = enquiryImages.length > 0;
-      const body = hasImages ? new FormData() : JSON.stringify(fields);
-      if (body instanceof FormData) {
+      const body = new FormData();
+      {
         Object.entries(fields).forEach(([key, value]) => body.append(key, value));
         enquiryImages.forEach((file) => body.append("attachments", file, file.name));
       }
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(BASIN_ENDPOINT, {
         method: "POST",
-        headers: hasImages
-          ? { Accept: "application/json" }
-          : { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { Accept: "application/json" },
         body,
       });
       if (!res.ok) {
         const response = await res.json().catch(() => null);
         const details = response?.errors?.map((error: { message?: string }) => error.message).filter(Boolean).join(" ");
         throw new Error(details || (hasImages
-          ? "Photo upload failed. Check that your Formspree plan supports file uploads."
+          ? "Photo upload failed. Check your Basin form attachment settings."
           : "Form submission failed. Please try again."));
       }
       toast({ title: "Enquiry Sent", description: "Thanks for reaching out. We'll be in touch soon." });

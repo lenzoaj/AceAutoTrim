@@ -187,7 +187,7 @@ export default function Home() {
           aria-hidden="true"
           className="absolute inset-0 m-auto w-[140vw] max-w-none md:w-[70vw] opacity-[0.05] brightness-0 invert pointer-events-none select-none z-0"
         />
-
+<div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
         {/* Mobile logo */}
 <img
   src={logo}

@@ -170,7 +170,7 @@ const [activeGallery, setActiveGallery] = useState<{
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Header */}
       <header className="absolute top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center">
-        <div className="hidden md:block md:w-56">
+        <div className="hidden md:block md:w-64 lg:w-72">
           <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain brightness-0 invert" />
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-muted-foreground">
@@ -223,14 +223,14 @@ const [activeGallery, setActiveGallery] = useState<{
 
 
 {/* Large white ACE logo at top of mobile hero */}
-<div className="absolute top-2 left-0 right-0 z-20 flex justify-center pointer-events-none md:hidden">
+<div className="absolute top-3 left-0 right-0 z-20 flex justify-center pointer-events-none md:hidden">
   <img
     src={logo}
     alt="Ace Automotive Trimming"
-    className="w-[88vw] max-w-[430px] h-auto object-contain brightness-0 invert"
+    className="w-[72vw] max-w-[300px] h-auto object-contain brightness-0 invert"
   />
 </div>
-<div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
+<div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl pt-28 sm:pt-32 md:pt-0">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
             Stitched<br/><span className="text-primary">To Last.</span>
           </h1>

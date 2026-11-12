@@ -170,7 +170,7 @@ const [activeGallery, setActiveGallery] = useState<{
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Header */}
       <header className="absolute top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center">
-        <div className="hidden md:block md:w-64 lg:w-72">
+        <div className="hidden md:block md:w-72 lg:w-80 self-start">
           <img src={logo} alt="Ace Automotive Trimming" className="w-full h-auto object-contain brightness-0 invert" />
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-muted-foreground">

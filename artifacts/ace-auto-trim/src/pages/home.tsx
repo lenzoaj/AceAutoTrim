@@ -266,18 +266,18 @@ const [activeGallery, setActiveGallery] = useState<{
         <div className="container mx-auto px-6">
           <Reveal className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight">Our Services</h2>
-            <p className="text-muted-foreground max-w-sm">Specializing in high-end re-trims and restorations. If it's in the cabin, we craft it.</p>
+            <p className="text-muted-foreground max-w-sm">Automotive upholstery and motor trimming in Wangara, Perth — from car seat repairs and leather retrims to custom interiors and classic car restoration.</p>
           </Reveal>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {[
               {
                 title: "Seat Repairs",
-                desc: "Fixing tears, worn bolsters, and damaged foam to bring tired seats back to like-new condition.",
+                desc: "Car seat upholstery repairs in Perth, including torn fabric, cracked vinyl, worn leather bolsters, damaged foam and seat cushion restoration.",
               },
               {
                 title: "Headlinings",
-                desc: "Replacing sagging or stained headlining fabric with a clean, factory-tight finish.",
+                desc: "Sagging car roof lining repairs and headliner replacement in Perth, restoring worn, loose or stained automotive headlining fabric.",
               },
               {
                 title: "Tonneau Covers",
@@ -285,23 +285,23 @@ const [activeGallery, setActiveGallery] = useState<{
               },
               {
                 title: "Steering Wheel Recovers",
-                desc: "Re-wrapping worn steering wheels in fresh leather with clean, precise stitching.",
+                desc: "Leather steering wheel retrimming and recovering, replacing worn, peeling or damaged steering wheel upholstery with precise stitching.",
               },
               {
                 title: "Leather Retrims",
-                desc: "Full seat and interior leather/suede/cloth retrims in your choice of colour, stitch pattern, and finish.",
+                desc: "Custom car leather interiors, full seat retrims, suede and Alcantara-style upholstery, cloth and vinyl seat recovering, diamond stitching and bespoke interior trim.",
               },
               {
                 title: "Classic Car Resto Seat Work",
-                desc: "Period-correct seat restorations for classic and custom builds.",
+                desc: "Classic car interior restoration, vintage seat upholstery, muscle car retrims and period-inspired automotive trimming for restoration and custom builds.",
               },
               {
                 title: "General Repairs and Maintenance",
-                desc: "Ongoing trim upkeep and repairs to keep your interior looking sharp for years to come.",
+                desc: "Interior trim repairs for door cards, armrests, centre consoles, damaged vinyl, loose upholstery and other worn car cabin surfaces.",
               },
               {
                 title: "Carpet Replacement",
-                desc: "Fitting new moulded or custom-cut carpet sets to replace worn, torn, or faded flooring.",
+                desc: "Automotive carpet replacement and custom car floor carpeting, including worn, torn or faded interior carpet and boot trim.",
               },
               {
                 title: "Marine Seats",
@@ -382,6 +382,16 @@ const [activeGallery, setActiveGallery] = useState<{
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Local automotive upholstery search information */}
+      <section className="py-12 bg-background border-b border-border" aria-labelledby="perth-trimming-heading">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <h2 id="perth-trimming-heading" className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">Motor Trimming &amp; Car Upholstery in Perth</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            Based in Wangara, Western Australia, Ace Automotive Trimming specialises in automotive upholstery, car interior retrimming and custom vehicle interiors for Perth motorists. Our trimming work includes leather car seats, vinyl and cloth upholstery, seat bolster repairs, sagging roof lining replacement, headlining repairs, steering wheel leather recovering, door trim repairs, carpet replacement and classic car interior restoration. Whether you're refreshing a daily driver's worn interior or planning a complete custom retrim, contact us to discuss your vehicle and the finish you're after.
+          </p>
         </div>
       </section>
 

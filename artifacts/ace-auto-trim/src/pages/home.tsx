@@ -57,7 +57,7 @@ import supra_4 from "@assets/MK4_Supra_Starlights_(2)_1783350982068.JPG";
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required").max(200),
-  email: z.string().email("Invalid email address").max(320),
+  email: z.string().trim().min(1, "Please enter a valid email address").email("Please enter a valid email address").max(320),
   phone: z.string().max(50).optional().nullable(),
   vehicle: z.string().max(200).optional().nullable(),
   message: z.string().min(1, "Message is required").max(5000),
@@ -81,6 +81,8 @@ const [activeGallery, setActiveGallery] = useState<{
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onBlur",
+    reValidateMode: "onChange",
     defaultValues: {
       name: "",
       email: "",

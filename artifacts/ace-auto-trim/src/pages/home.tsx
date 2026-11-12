@@ -185,15 +185,19 @@ export default function Home() {
           src={logo}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 m-auto w-[140vw] max-w-none md:w-[70vw] opacity-[0.05] brightness-0 invert pointer-events-none select-none z-0"
+          className="hidden md:block absolute inset-0 m-auto w-[70vw] max-w-none opacity-[0.05] brightness-0 invert pointer-events-none select-none z-0"
         />
+
+
+{/* Large white ACE logo at top of mobile hero */}
+<div className="absolute top-16 left-0 right-0 z-20 flex justify-center pointer-events-none md:hidden">
+  <img
+    src={logo}
+    alt="Ace Automotive Trimming"
+    className="w-[88vw] max-w-[430px] h-auto object-contain brightness-0 invert"
+  />
+</div>
 <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center max-w-4xl">
-        {/* Mobile logo */}
-<img
-  src={logo}
-  alt="Ace Automotive Trimming"
-  className="block md:hidden w-[85%] max-w-[380px] h-auto object-contain mb-10"
-/>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.9] text-white">
             Stitched<br/><span className="text-primary">To Last.</span>
           </h1>

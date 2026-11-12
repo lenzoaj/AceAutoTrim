@@ -68,6 +68,8 @@ type FormValues = z.infer<typeof formSchema>;
 export default function Home() {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
+  const [enquiryImages, setEnquiryImages] = useState<File[]>([]);
+  const [imageInputKey, setImageInputKey] = useState(0);
 const [activeGallery, setActiveGallery] = useState<{
   projectIndex: number;
   imageIndex: number;
@@ -91,25 +93,43 @@ const [activeGallery, setActiveGallery] = useState<{
   async function onSubmit(data: FormValues) {
     setSubmitting(true);
     try {
+      const fields = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone || "",
+        vehicle: data.vehicle || "",
+        message: data.message,
+      };
+      const hasImages = enquiryImages.length > 0;
+      const body = hasImages ? new FormData() : JSON.stringify(fields);
+      if (body instanceof FormData) {
+        Object.entries(fields).forEach(([key, value]) => body.append(key, value));
+        enquiryImages.forEach((file) => body.append("attachments", file, file.name));
+      }
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          phone: data.phone || "",
-          vehicle: data.vehicle || "",
-          message: data.message,
-        }),
+        headers: hasImages
+          ? { Accept: "application/json" }
+          : { "Content-Type": "application/json", Accept: "application/json" },
+        body,
       });
-      if (res.ok) {
-        toast({ title: "Enquiry Sent", description: "Thanks for reaching out. We'll be in touch soon." });
-        form.reset();
-      } else {
-        throw new Error("Form submission failed");
+      if (!res.ok) {
+        const response = await res.json().catch(() => null);
+        const details = response?.errors?.map((error: { message?: string }) => error.message).filter(Boolean).join(" ");
+        throw new Error(details || (hasImages
+          ? "Photo upload failed. Check that your Formspree plan supports file uploads."
+          : "Form submission failed. Please try again."));
       }
-    } catch {
-      toast({ variant: "destructive", title: "Failed to send enquiry", description: "Please try again later." });
+      toast({ title: "Enquiry Sent", description: "Thanks for reaching out. We'll be in touch soon." });
+      form.reset();
+      setEnquiryImages([]);
+      setImageInputKey((key) => key + 1);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to send enquiry",
+        description: error instanceof Error ? error.message : "Please try again later.",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -509,6 +529,47 @@ const [activeGallery, setActiveGallery] = useState<{
                       </FormItem>
                     )}
                   />
+
+                  <div className="space-y-2">
+                    <label htmlFor="enquiry-images" className="block uppercase tracking-wider text-xs text-muted-foreground">
+                      Attach Images (Optional)
+                    </label>
+                    <Input
+                      key={imageInputKey}
+                      id="enquiry-images"
+                      name="attachments"
+                      type="file"
+                      multiple
+                      accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                      className="bg-background border-border rounded-none h-auto min-h-12 py-3 focus-visible:ring-primary file:mr-4 file:text-foreground"
+                      onChange={(event) => {
+                        const files = Array.from(event.target.files || []);
+                        if (files.length > 5) {
+                          event.target.value = "";
+                          setEnquiryImages([]);
+                          toast({ variant: "destructive", title: "Too many photos", description: "Please select up to 5 photos." });
+                          return;
+                        }
+                        if (files.some((file) => file.size > 10 * 1024 * 1024)) {
+                          event.target.value = "";
+                          setEnquiryImages([]);
+                          toast({ variant: "destructive", title: "Photo too large", description: "Each photo must be 10 MB or smaller." });
+                          return;
+                        }
+                        setEnquiryImages(files);
+                      }}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Up to 5 photos, maximum 10 MB each. JPG, PNG, WebP or HEIC.
+                    </p>
+                    {enquiryImages.length > 0 && (
+                      <ul className="text-sm text-muted-foreground space-y-1" aria-live="polite">
+                        {enquiryImages.map((file, index) => (
+                          <li key={index} className="break-all">{file.name}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
 
                   <Button 
                     type="submit" 

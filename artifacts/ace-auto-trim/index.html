@@ -1,166 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoBodyShop",
+  "name": "Ace Auto Trim",
+  "image": "https://aceautotrim.com.au/apple-touch-icon.png",
+  "logo": "https://aceautotrim.com.au/apple-touch-icon.png",
+  "url": "https://aceautotrim.com.au",
+  "telephone": "0434313810",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "47 Dellamarta Road",
+    "addressLocality": "Wangara",
+    "addressRegion": "WA",
+    "postalCode": "6065",
+    "addressCountry": "AU"
+  },
+  "areaServed": [
+    "Wangara",
+    "Perth",
+    "Western Australia"
+  ],
+  "description": "Ace Auto Trim provides professional automotive trimming, upholstery, roof linings, seat repairs, marine trimming, motorcycle seats and custom interiors in Wangara, Western Australia.",
+  "priceRange": "$$",
+  "sameAs": []
+}
+</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Ace Auto Trim | Automotive Trimming Specialists | Wangara, WA</title>
 
-  <title>Ace Auto Trim | Opening 2027</title>
-  <meta name="description" content="Ace Auto Trim is opening in 2027. Automotive trimming, upholstery, custom interiors and restoration work in Wangara, Western Australia." />
-  <meta name="robots" content="index, follow" />
+<meta name="description" content="Ace Auto Trim specialises in automotive upholstery, seat repairs, roof linings, custom trimming, marine trimming, motorcycle seats and classic car restorations in Wangara, Western Australia.">
 
-  <style>
-    :root {
-      --bg: #050505;
-      --line: rgba(255, 255, 255, 0.18);
-      --text: #ffffff;
-      --muted: #b7b7b7;
-    }
+<meta name="keywords" content="automotive trimming, auto upholstery, roof lining repair, headliner replacement, car seat repair, custom upholstery, marine trimming, motorcycle seats, classic car restoration, Wangara, Perth">
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      min-height: 100%;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    body {
-      display: grid;
-      place-items: center;
-      padding: 28px;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 50% 20%, rgba(255,255,255,0.14), transparent 34%),
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08), transparent 30%),
-        linear-gradient(135deg, #000 0%, #090909 45%, #181818 100%);
-      z-index: -2;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at center, black, transparent 72%);
-      z-index: -1;
-    }
-
-    .wrap {
-      width: min(980px, 100%);
-      text-align: center;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
-      border-radius: 28px;
-      padding: clamp(36px, 7vw, 78px);
-      box-shadow: 0 28px 90px rgba(0,0,0,0.55);
-      backdrop-filter: blur(12px);
-    }
-
-    .logo {
-      width: min(620px, 92%);
-      height: auto;
-      margin-bottom: clamp(34px, 6vw, 56px);
-      filter: drop-shadow(0 0 22px rgba(255,255,255,0.18));
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.34em;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 22px;
-    }
-
-    .eyebrow::before,
-    .eyebrow::after {
-      content: "";
-      width: 44px;
-      height: 1px;
-      background: var(--line);
-    }
-
-    h1 {
-      font-size: clamp(42px, 9vw, 92px);
-      line-height: 0.96;
-      letter-spacing: -0.055em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .year {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 1.5px #fff;
-    }
-
-    p {
-      max-width: 650px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: clamp(17px, 2.4vw, 22px);
-      line-height: 1.6;
-    }
-
-    .divider {
-      width: min(360px, 70%);
-      height: 1px;
-      margin: 34px auto;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
-    }
-
-    .details {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      color: #e8e8e8;
-      font-size: 14px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 12px 18px;
-      background: rgba(255,255,255,0.035);
-    }
-
-    @media (max-width: 560px) {
-      body { padding: 18px; }
-      .wrap { border-radius: 22px; }
-      .eyebrow { letter-spacing: 0.22em; font-size: 11px; }
-      .eyebrow::before, .eyebrow::after { width: 24px; }
-    }
-  </style>
-</head>
-
-<body>
-  <main class="wrap">
-    <img class="logo" src="./ace-logo.png" alt="Ace Auto Trim logo" />
-    <div class="eyebrow">Business Opening Soon</div>
-    <h1>Opening <span class="year">2027</span></h1>
-    <p>Ace Auto Trim is opening in 2027, bringing automotive trimming, upholstery, custom interiors and restoration work to Wangara, Western Australia.</p>
-    <div class="divider"></div>
-    <div class="details">
-      <span class="pill">Wangara WA</span>
-      <span class="pill">Automotive Trimming</span>
-      <span class="pill">Custom Interiors</span>
-    </div>
-  </main>
-</body>
+<meta name="author" content="Ace Auto Trim">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Ace Auto Trim">
+<meta property="og:description" content="Professional automotive trimming, upholstery, roof linings, marine trimming and custom interiors in Wangara, Western Australia.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./apple-touch-icon.png">
+<meta property="og:url" content="https://aceautotrim.com.au">
+<meta property="og:site_name" content="Ace Auto Trim">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ace Auto Trim">
+<meta name="twitter:description" content="Professional automotive trimming and upholstery in Perth, Western Australia.">
+<meta name="twitter:image" content="./apple-touch-icon.png">
+    <link rel="icon" href="./favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="manifest" href="./site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
+<meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no">

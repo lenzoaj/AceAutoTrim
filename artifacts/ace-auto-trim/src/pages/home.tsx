@@ -61,7 +61,10 @@ type FormValues = z.infer<typeof formSchema>;
 export default function Home() {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
-  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
+const [activeGallery, setActiveGallery] = useState<{
+  projectIndex: number;
+  imageIndex: number;
+} | null>(null);
   const [openService, setOpenService] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -236,7 +239,7 @@ export default function Home() {
               },
               {
                 title: "Tonneau Covers",
-                desc: "Custom-fitted tray and ute covers built to protect your load and match your interior.",
+                desc: "Custom-fitted tray and ute covers built to protect your load while looking good.",
               },
               {
                 title: "Steering Wheel Recovers",
@@ -244,11 +247,11 @@ export default function Home() {
               },
               {
                 title: "Leather Retrims",
-                desc: "Full seat and interior leather retrims in your choice of colour, stitch pattern, and finish.",
+                desc: "Full seat and interior leather/suede/cloth retrims in your choice of colour, stitch pattern, and finish.",
               },
               {
                 title: "Classic Car Resto Seat Work",
-                desc: "Period-correct seat restorations for classic and custom builds, done to show standard.",
+                desc: "Period-correct seat restorations for classic and custom builds.",
               },
               {
                 title: "General Repairs and Maintenance",
@@ -296,6 +299,9 @@ export default function Home() {
 
           <p className="mt-16 text-center text-lg font-medium uppercase tracking-widest text-primary">
             And Much More
+            <p className="text-white text-sm mt-2">
+  Enquire for details on other services
+</p>
           </p>
         </div>
       </section>
@@ -319,13 +325,13 @@ export default function Home() {
                     <button
                       key={i}
                       type="button"
-                      onClick={() => setLightboxImage({ src: img, alt: `${project.title} detail ${i + 1}` })}
+                      onClick={() => setActiveGallery({ projectIndex: idx, imageIndex: i })}
                       className="aspect-square bg-zinc-900 overflow-hidden relative group cursor-zoom-in"
                     >
                       <img 
                         src={img} 
                         alt={`${project.title} detail ${i+1}`} 
-                        className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
+                        className="w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 ease-out" 
                       />
                       <div className="absolute inset-0 border border-white/10 pointer-events-none" />
                     </button>
@@ -514,26 +520,93 @@ export default function Home() {
       </section>
 
       {/* Lightbox */}
-      {lightboxImage && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 animate-in fade-in duration-200"
-          onClick={() => setLightboxImage(null)}
+      
+{/* Project Gallery Lightbox */}
+{activeGallery && (() => {
+  const project = projects[activeGallery.projectIndex];
+  const imageIndex = activeGallery.imageIndex;
+  const total = project.images.length;
+
+  const navigate = (direction: number) => {
+    setActiveGallery({
+      projectIndex: activeGallery.projectIndex,
+      imageIndex: (imageIndex + direction + total) % total,
+    });
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 p-4 md:p-12"
+      onClick={() => setActiveGallery(null)}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.title} photo gallery`}
+    >
+      <button
+        type="button"
+        onClick={() => setActiveGallery(null)}
+        className="absolute top-5 right-5 z-20 p-3 text-white"
+        aria-label="Close gallery"
+      >
+        <X className="w-7 h-7" />
+      </button>
+
+      <div
+        className="text-center mb-5"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3 className="text-white font-bold uppercase tracking-widest">
+          {project.title}
+        </h3>
+        <p className="text-zinc-400 text-sm mt-2">
+          {imageIndex + 1} / {total}
+        </p>
+      </div>
+
+      <div
+        className="relative flex items-center justify-center w-full max-w-6xl min-h-0"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => {
+          e.currentTarget.dataset.touchX =
+            String(e.touches[0].clientX);
+        }}
+        onTouchEnd={(e) => {
+          const startX = Number(e.currentTarget.dataset.touchX);
+          const difference = e.changedTouches[0].clientX - startX;
+
+          if (Math.abs(difference) > 50) {
+            navigate(difference < 0 ? 1 : -1);
+          }
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="absolute left-0 z-10 p-2 md:p-4 bg-black/60 text-white hover:text-primary"
+          aria-label="Previous photo"
         >
-          <button
-            type="button"
-            onClick={() => setLightboxImage(null)}
-            className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center border border-white/20 text-white hover:border-primary hover:text-primary transition-colors"
-            aria-label="Close"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          <img
-            src={lightboxImage.src}
-            alt={lightboxImage.alt}
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
+          <ChevronLeft className="w-7 h-7 md:w-10 md:h-10" />
+        </button>
+
+        <img
+          src={project.images[imageIndex]}
+          alt={`${project.title} photo ${imageIndex + 1}`}
+          className="max-w-full max-h-[70vh] object-contain"
+        />
+
+        <button
+          type="button"
+          onClick={() => navigate(1)}
+          className="absolute right-0 z-10 p-2 md:p-4 bg-black/60 text-white hover:text-primary"
+          aria-label="Next photo"
+        >
+          <ChevronRight className="w-7 h-7 md:w-10 md:h-10" />
+        </button>
+      </div>
+    </div>
+  );
+})()}
+
       )}
 
       {/* Footer */}
